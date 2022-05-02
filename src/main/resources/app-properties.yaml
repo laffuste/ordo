@@ -1,0 +1,8 @@
+validator:
+  notional:
+    limit-order:
+      limit: 10000
+    market-order:
+      limit: 20000
+  quantity:
+    limit: 100000

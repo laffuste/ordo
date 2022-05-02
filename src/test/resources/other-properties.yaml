@@ -1,0 +1,5 @@
+other-properties:
+  new-prop: "a new value"
+validator:
+  quantity:
+    limit: 100001

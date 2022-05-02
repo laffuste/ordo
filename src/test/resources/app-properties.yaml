@@ -1,0 +1,4 @@
+property-a: 100
+test-properties:
+  property-b: 200
+  property-c: 300

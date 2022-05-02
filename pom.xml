@@ -12,14 +12,19 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
 
         <guava.version>31.1-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <assertj.version>3.22.0</assertj.version>
 
         <log4j.version>2.17.2</log4j.version>
         <lombok.version>1.18.24</lombok.version>
+        <snakeyaml.version>1.30</snakeyaml.version>
+
+        <!-- test -->
+        <junit-jupiter-engine.version>5.4.0</junit-jupiter-engine.version>
+        <assertj.version>3.22.0</assertj.version>
+        <mockito.version>3.3.3</mockito.version>
 
         <!-- maven plugins -->
         <surefire.version>3.0.0-M6</surefire.version>
@@ -28,7 +33,6 @@
 
 
     <dependencies>
-
         <!-- utils -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -40,6 +44,13 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
+        </dependency>
+
 
         <!-- logging -->
         <dependency>
@@ -64,6 +75,18 @@
 <!--            <artifactId>h2</artifactId>-->
 <!--            <scope>runtime</scope>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.3.3</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -100,8 +123,15 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
 
         </plugins>
     </build>
