@@ -1,4 +1,4 @@
-package com.laffuste.ordo.validation;
+package com.laffuste.ordo.validation.application.properties;
 
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;

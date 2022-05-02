@@ -38,7 +38,7 @@ Order validation system POC.
 
 ### Order validation
 
-:info: Execute when the app is running.
+:information_source: Execute when the app is running.
 
 - Send a valid order:
   ```bash
@@ -79,19 +79,26 @@ Execute tests:
 
 ### Technical choices
 
-
-:warning: Important Foreword: the code has been deliberately overengineered for the sake of discussion
+>:warning: Important Foreword: the code has been deliberately overengineered for the sake of discussion
 
 - For the sake of conversation, the code has been deliberately overengineered. It hopefully is not to the point of obfuscating readability too much. Over-usage of patterns and inheritance is itself an anti-pattern. This repo might seem unnecessarily complicated at first.
 - Hexagonal design allows for easier maintenance on the long term and prepares for potential complexity. However, in the requirements no inputs/outputs to the system have been specified. For the sake of having one, a simple, naive http server has been created with `SimpleController`.
 - Avoided using frameworks like Spring to give a more raw design
 - Attempted a design that minimises impact on code if requirements increase
-- `properties` package: 
-  - properties loading has no dependencies on validations and could be extracted to a library.
+
+#### Structure
+
+- `properties` package:
+  - properties loading has no external dependencies and could be extracted to a library. The mapping of properties to domain models (which is tied to validations or future modules) is done by dependency injection.
   - its configuration is modular (see `validation.Application`): currently it takes the default config file (`app.properties`) and merges it with any yaml or java props file in the classpath given by command line arg `app.config`
-  - can be easily expanded with extra loaders (e.g. HttpFileLoader, FSFileLoader, ScpFileLoader...) or parsers (e.g. XMLPropertyParser, JsonPropertyParser...)
-- `validation` package: 
-  - hexagonal architecture would allow to expand / modify the application entrypoints with no changes on the `application` package. 
+  - can be easily expanded with extra loaders (e.g. HttpFileLoader, FSFileLoader, ScpFileLoader...) or parsers (e.g. XMLPropertyParser, JsonPropertyParser...) and added to the programmatic configuration
+
+- `validation` package:
+  - subpackages (hexagonal):
+    - adapter: i/o of the system (db access, web server, etc). In this case, a simple web server.
+    - application: the business logic
+    - domain: domain models, usually pojos
+  - hexagonal architecture would allow to expand / modify the application entrypoints with no changes on the `application` package. A new entrypoint e.g. "FileWatcher" could be created and `OrderValidationUseCase` transparently injected.
   - adding Validators is done by linking the new ones in `OrderValidationService` (and adding the relevant tests).
   - adding new properties would require a change only in `OrdoValidationProperties` and `ValidationPropertiesMapper` (and the property itself)
 
@@ -116,3 +123,4 @@ Execute tests:
 - low latency
 - separate domain, application and adapter into maven modules (maven multi-module) so that not only the code has a dependency direction but each module's libraries are also isolated
 - extract properties package as a lib
+- validator could return an object instead of a list of strings, so to also inform of warning sor info messages

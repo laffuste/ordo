@@ -1,7 +1,6 @@
-package com.laffuste.ordo.validation.application.util;
+package com.laffuste.ordo.validation.application.properties;
 
 import com.laffuste.ordo.properties.domain.TypedProperties;
-import com.laffuste.ordo.validation.OrdoValidationProperties;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,6 @@
 package com.laffuste.ordo.validation.application;
 
-import com.laffuste.ordo.validation.OrdoValidationProperties;
+import com.laffuste.ordo.validation.application.properties.OrdoValidationProperties;
 import com.laffuste.ordo.validation.domain.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
