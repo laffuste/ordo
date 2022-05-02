@@ -23,6 +23,18 @@ class TypedPropertiesTest {
     }
 
     @Test
+    void getInt_whenString() {
+        // given
+        properties.put("my-int", "10");
+
+        // when
+        int i = properties.getInt("my-int");
+
+        // then
+        assertThat(i).isEqualTo(10);
+    }
+
+    @Test
     void getInt_whenNotInteger_expectError() {
         // given
         properties.put("not-an-int", "oops");
@@ -40,6 +52,18 @@ class TypedPropertiesTest {
     void getDouble() {
         // given
         properties.put("my-double", 10.1);
+
+        // when
+        double d = properties.getDouble("my-double");
+
+        // then
+        assertThat(d).isEqualTo(10.1);
+    }
+
+    @Test
+    void getDouble_whenString() {
+        // given
+        properties.put("my-double", "10.1");
 
         // when
         double d = properties.getDouble("my-double");

@@ -1,4 +1,4 @@
-package com.laffuste.ordo.validation.adapter;
+package com.laffuste.ordo.validation.application.util;
 
 import com.laffuste.ordo.properties.domain.TypedProperties;
 import com.laffuste.ordo.validation.OrdoValidationProperties;
@@ -13,7 +13,7 @@ public class ValidationPropertiesMapper {
     private static final String DEFAULT_MARKET_ORDER_PRICE = "order.market.default-price";
 
     /**
-     * Mapping of jvm args to properties.
+     * Mapping of properties to model
      */
     public static OrdoValidationProperties toOrdoProperties(TypedProperties properties) {
         double notionalLimitLimit = properties.getDouble(VALIDATOR_NOTIONAL_LIMIT_ORDER_LIMIT);

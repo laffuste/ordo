@@ -1,6 +1,6 @@
 package com.laffuste.ordo.properties.loaders;
 
-import com.laffuste.ordo.properties.exception.PropertiesFileNotFound;
+import com.laffuste.ordo.properties.exception.PropertiesLoadingExpection;
 import com.laffuste.ordo.properties.parsers.YamlPropertyParser;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class YamlPropertyLoaderTest {
     private final YamlPropertyParser loader = new YamlPropertyParser();
 
     @Test
-    public void load() throws PropertiesFileNotFound, IOException {
+    public void load() throws PropertiesLoadingExpection, IOException {
         // given
         String filename = "app-properties.yaml";
 
@@ -50,7 +50,7 @@ class YamlPropertyLoaderTest {
 //    }
 
     @Test
-    void load_whenNotYaml_expectError() throws PropertiesFileNotFound, IOException {
+    void load_whenNotYaml_expectError() throws PropertiesLoadingExpection, IOException {
         // given
         String filename = "app.properties";
 
@@ -62,7 +62,7 @@ class YamlPropertyLoaderTest {
 
         // then
         assertThat(t)
-                .isInstanceOf(PropertiesFileNotFound.class)
+                .isInstanceOf(PropertiesLoadingExpection.class)
                 .hasMessage("Couldn't parse properties");
     }
 

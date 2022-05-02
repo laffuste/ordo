@@ -9,9 +9,7 @@ import java.util.Set;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 public class TypeValidator extends BaseValidator<Order> {
-
     private static final Set<String> validTypes = ImmutableSet.of(Order.TYPE_LIMIT, Order.TYPE_MARKET);
-
     @Override
     public void validate(Order order, List<String> errors) {
         if (order != null) {

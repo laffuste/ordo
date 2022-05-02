@@ -1,8 +1,7 @@
 package com.laffuste.ordo.properties.loaders;
 
-import com.laffuste.ordo.properties.exception.PropertiesFileNotFound;
+import com.laffuste.ordo.properties.exception.PropertiesLoadingExpection;
 import com.laffuste.ordo.properties.parsers.PropertiesFileParser;
-import com.laffuste.ordo.properties.loaders.PropertiesLoader;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -11,6 +10,9 @@ import java.util.Properties;
 
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
+/**
+ * Loads properties supplied by args from the classpath.
+ */
 @Slf4j
 public class ClasspathPropertiesLoader implements PropertiesLoader {
 
@@ -22,7 +24,6 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
         this.configFileJvmArg = configFileJvmArg;
         this.fileLoaders = fileLoaders;
     }
-
     @Override
     public Properties load() {
         String configFile  = System.getProperty(configFileJvmArg);
@@ -33,16 +34,15 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
 
         try {
             return findPropertiesByFileName(configFile);
-        } catch (PropertiesFileNotFound ex) {
+        } catch (PropertiesLoadingExpection ex) {
             log.warn("Properties file not found: {}", configFile, ex);
             return new Properties();
         }
     }
-
-    private Properties findPropertiesByFileName(String configFile) throws PropertiesFileNotFound {
+    private Properties findPropertiesByFileName(String configFile) throws PropertiesLoadingExpection {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream(configFile)) {
             if (input == null) {
-                throw new PropertiesFileNotFound(configFile);
+                throw new PropertiesLoadingExpection(configFile);
             }
             for (PropertiesFileParser loader : fileLoaders) {
                 if (loader.shouldTryToLoad(configFile)) {
@@ -50,7 +50,7 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
                 }
             }
         } catch (IOException e) {
-            throw new PropertiesFileNotFound(configFile, e);
+            throw new PropertiesLoadingExpection(configFile, e);
         }
         return new Properties();
     }

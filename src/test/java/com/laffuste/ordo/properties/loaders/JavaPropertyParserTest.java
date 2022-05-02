@@ -1,6 +1,6 @@
 package com.laffuste.ordo.properties.loaders;
 
-import com.laffuste.ordo.properties.exception.PropertiesFileNotFound;
+import com.laffuste.ordo.properties.exception.PropertiesLoadingExpection;
 import com.laffuste.ordo.properties.parsers.JavaPropertyParser;
 import com.laffuste.ordo.properties.parsers.PropertiesFileParser;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class JavaPropertyParserTest {
     private final PropertiesFileParser loader = new JavaPropertyParser();
 
     @Test
-    void load() throws PropertiesFileNotFound, IOException {
+    void load() throws PropertiesLoadingExpection, IOException {
         // given
         String filename = "app.properties";
 

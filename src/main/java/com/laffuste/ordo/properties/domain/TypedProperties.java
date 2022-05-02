@@ -24,6 +24,13 @@ public class TypedProperties extends Properties {
         if (ret instanceof Integer) {
             return (Integer) ret;
         }
+        if (ret instanceof String) {
+            try {
+                return Integer.valueOf((String) ret);
+            } catch (NumberFormatException e) {
+                // doesn't matter
+            }
+        }
         throw new IllegalArgumentException(format("Property %s is not an integer: %s", propertyName, ret));
     }
 
@@ -31,6 +38,16 @@ public class TypedProperties extends Properties {
         Object ret = this.get(propertyName);
         if (ret instanceof Double) {
             return (Double) ret;
+        }
+        if (ret instanceof Integer) {
+            return ((Integer)ret).doubleValue();
+        }
+        if (ret instanceof String) {
+            try {
+                return Double.valueOf((String) ret);
+            } catch (NumberFormatException e) {
+                // doesn't matter
+            }
         }
         throw new IllegalArgumentException(format("Property %s is not a double: %s", propertyName, ret));
     }

@@ -12,10 +12,8 @@ import lombok.Value;
 @RequiredArgsConstructor
 @Builder
 public class OrdoValidationProperties {
-
     double notionalValidatorMarketTypeThreshold;
     double notionalValidatorLimitTypeThreshold;
     double defaultMarketOrderPrice;
     int quantityValidatorLimit;
-
 }
