@@ -1,4 +1,4 @@
-package com.laffuste.ordo.domain;
+package com.laffuste.ordo.validation.domain;
 
 public enum OrderType {
     LIMIT,

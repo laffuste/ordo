@@ -24,7 +24,6 @@ class PropertyLoadingIT {
                 .add(new DefaultPropertiesLoader(javaPropertyLoader))
                 .add(new ClasspathPropertiesLoader("app.config", yamlPropertyLoader, javaPropertyLoader))
                 .mapper(MyProperties::new);
-//        System.setProperty("app.config", "src/test/resources/other-properties.yaml");
         System.setProperty("app.config", "other-properties.yaml");
 
         // when
