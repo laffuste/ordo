@@ -1,6 +1,7 @@
 package com.laffuste.ordo.validation.adapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Stopwatch;
 import com.laffuste.ordo.validation.application.in.OrderValidationUseCase;
 import com.laffuste.ordo.validation.domain.Order;
 import com.sun.net.httpserver.HttpExchange;
@@ -26,11 +27,12 @@ public class SimpleController {
     }
 
     public void start(int port) throws Exception {
+        Stopwatch watch = Stopwatch.createStarted();
         server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/validate", handler);
         server.setExecutor(null); // creates a default executor
         server.start();
-        log.info("server started in port {}", port);
+        log.info("Web server started in port {} in {}", port, watch);
     }
 
     public void stop() {

@@ -6,8 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Arrays;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 /**
@@ -28,14 +33,18 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
     public Properties load() {
         String configFile  = System.getProperty(configFileJvmArg);
         if (isBlank(configFile)) {
-           log.debug("no config file supplied by jvm arg");
+           log.info("No config file supplied by jvm arg");
            return new Properties();
         }
 
+        log.info("Attempting to load {}", configFile);
+        if (log.isDebugEnabled()) {
+            printClassPath();
+        }
         try {
             return findPropertiesByFileName(configFile);
         } catch (PropertiesLoadingExpection ex) {
-            log.warn("Properties file not found: {}", configFile, ex);
+            log.warn("Properties file not found: {}", configFile);
             return new Properties();
         }
     }
@@ -53,5 +62,14 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
             throw new PropertiesLoadingExpection(configFile, e);
         }
         return new Properties();
+    }
+
+    private void printClassPath() {
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+        String classpaths = Arrays.stream(urls)
+                .map(URL::getFile)
+                .collect(joining(", "));
+        log.debug("Searching in classpaths: {}", classpaths);
     }
 }

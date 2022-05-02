@@ -20,7 +20,6 @@ Order validation system POC.
 
 ## Getting started
 
-
 ### Building and running the app
 
 - From IDE: run `Application#main`.
@@ -31,10 +30,16 @@ Order validation system POC.
      mvn install
      # output will show the jar location (ordo\target)
      ```
-  1. Run the app:
+  2. Run the app:
      ```bash
      java -jar <jar_with_dependencies_location>
      ```
+  3. To run the app with user supplied properties (e.g. `my-conf.yaml`):
+     ```bash 
+       java -Dapp.config=my-conf.yaml -cp "ordo-1.0-SNAPSHOT-jar-with-dependencies.jar;." com.laffuste.ordo.Application
+       # for linux, use "<jar-name>.jar:." (colon) instead of "<jar-name>.jar;." (semicolon, windows)
+     ```
+     `java -jar` ignores additional classpath, so it needs to be called the non-jar way by adding jar and conf in the classpath
 
 ### Order validation
 
