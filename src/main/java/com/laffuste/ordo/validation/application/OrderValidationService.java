@@ -2,10 +2,7 @@ package com.laffuste.ordo.validation.application;
 
 import com.laffuste.ordo.validation.OrdoValidationProperties;
 import com.laffuste.ordo.validation.application.in.OrderValidationUseCase;
-import com.laffuste.ordo.validation.application.validators.BaseValidator;
-import com.laffuste.ordo.validation.application.validators.NotionalValidator;
-import com.laffuste.ordo.validation.application.validators.QuantityValidator;
-import com.laffuste.ordo.validation.application.validators.TypeValidator;
+import com.laffuste.ordo.validation.application.validators.*;
 import com.laffuste.ordo.validation.domain.Order;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +14,7 @@ import static java.util.Collections.emptyList;
 @Slf4j
 public class OrderValidationService implements OrderValidationUseCase {
 
-    private final BaseValidator<Order> validatorChain;
+    private final Validator<Order> validatorChain;
 
     public OrderValidationService(OrdoValidationProperties properties) {
         // build validation chain

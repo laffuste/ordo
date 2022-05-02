@@ -17,7 +17,7 @@ class ValidationPropertiesMapperTest {
     @Test
     public void toOrdoProperties() {
         // given
-        TypedProperties typedProps = new TypedProperties(4);
+        TypedProperties typedProps = new TypedProperties();
         typedProps.put("validator.notional.limit-order.limit", 100);
         typedProps.put("validator.notional.market-order.limit", 200);
         typedProps.put("validator.quantity.limit", 300);
@@ -37,7 +37,7 @@ class ValidationPropertiesMapperTest {
     @Test
     public void toOrdoProperties_whenEmpty() {
         // given
-        TypedProperties typedProps = new TypedProperties(4);
+        TypedProperties typedProps = new TypedProperties();
 
         // when
         Throwable t = catchThrowable(() -> ValidationPropertiesMapper.toOrdoProperties(typedProps));
@@ -45,7 +45,7 @@ class ValidationPropertiesMapperTest {
         // then
         assertThat(t)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(" Property validator.notional.limit-order.limit is not a double: null");
+                .hasMessage("Property validator.notional.limit-order.limit is not a double: null");
     }
 
 }

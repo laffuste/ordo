@@ -7,8 +7,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 class TypedPropertiesTest {
 
-//    private final TypedProperties properties = TypedProperties.ofProperties(new Properties());
-    private final TypedProperties properties = new TypedProperties(2);
+    private final TypedProperties properties = new TypedProperties();
 
     @Test
     void getInt() {

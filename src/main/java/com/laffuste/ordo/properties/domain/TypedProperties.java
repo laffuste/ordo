@@ -9,12 +9,12 @@ import static java.lang.String.format;
  */
 public class TypedProperties extends Properties {
 
-    public TypedProperties(int initialCapacity) {
-        super(initialCapacity);
+    public TypedProperties() {
+        super();
     }
 
     public static TypedProperties ofProperties(Properties p) {
-        TypedProperties typedProps = new TypedProperties(p.size());
+        TypedProperties typedProps = new TypedProperties();
         typedProps.putAll(p);
         return typedProps;
     }

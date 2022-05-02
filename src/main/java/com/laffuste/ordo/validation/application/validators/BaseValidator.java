@@ -3,9 +3,12 @@ package com.laffuste.ordo.validation.application.validators;
 import java.util.List;
 
 /**
- * Implements chain of responsibility / filter chain pattern.
+ * Implements chain of responsibility / filter chain pattern for validations.
+ *
+ * Implementations must call validateNext() inside validate().
+ * Validation errors are added to errors arg.
  */
-public abstract class BaseValidator<T> {
+public abstract class BaseValidator<T> implements Validator<T> {
 
     private BaseValidator<T> next;
 
@@ -25,12 +28,5 @@ public abstract class BaseValidator<T> {
         }
         next.validate(objToValidate, errors);
     }
-
-    /**
-     * Main validation method.
-     * Implementations must call validateNext() at some point.
-     * Validation errors are added to errors arg.
-     **/
-    public abstract void validate(T objToValidate, List<String> errors);
 
 }
