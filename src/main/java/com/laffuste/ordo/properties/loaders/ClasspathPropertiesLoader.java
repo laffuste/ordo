@@ -10,7 +10,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 import static org.apache.logging.log4j.util.Strings.isBlank;
@@ -29,12 +28,13 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
         this.configFileJvmArg = configFileJvmArg;
         this.fileLoaders = fileLoaders;
     }
+
     @Override
     public Properties load() {
-        String configFile  = System.getProperty(configFileJvmArg);
+        String configFile = System.getProperty(configFileJvmArg);
         if (isBlank(configFile)) {
-           log.info("No config file supplied by jvm arg");
-           return new Properties();
+            log.debug("No config file supplied by jvm arg");
+            return new Properties();
         }
 
         log.info("Attempting to load {}", configFile);
@@ -48,6 +48,7 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
             return new Properties();
         }
     }
+
     private Properties findPropertiesByFileName(String configFile) throws PropertiesLoadingExpection {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream(configFile)) {
             if (input == null) {
@@ -66,7 +67,7 @@ public class ClasspathPropertiesLoader implements PropertiesLoader {
 
     private void printClassPath() {
         ClassLoader cl = ClassLoader.getSystemClassLoader();
-        URL[] urls = ((URLClassLoader)cl).getURLs();
+        URL[] urls = ((URLClassLoader) cl).getURLs();
         String classpaths = Arrays.stream(urls)
                 .map(URL::getFile)
                 .collect(joining(", "));

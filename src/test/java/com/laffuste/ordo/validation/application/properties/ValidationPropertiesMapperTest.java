@@ -8,11 +8,6 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 class ValidationPropertiesMapperTest {
 
-    private static final String VALIDATOR_NOTIONAL_LIMIT_ORDER_LIMIT = "validator.notional.limit-order.limit";
-    private static final String VALIDATOR_NOTIONAL_MARKET_ORDER_LIMIT = "validator.notional.market-order.limit";
-    private static final String VALIDATOR_QUANTITY_LIMIT = "validator.quantity.limit";
-    private static final String DEFAULT_MARKET_ORDER_PRICE = "order.market.default-price";
-
     @Test
     public void toOrdoProperties() {
         // given

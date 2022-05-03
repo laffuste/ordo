@@ -7,5 +7,6 @@ import java.util.Properties;
 
 public interface PropertiesFileParser {
     Properties load(InputStream input) throws PropertiesLoadingExpection;
+
     boolean shouldTryToLoad(String filename);
 }

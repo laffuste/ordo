@@ -104,7 +104,6 @@ class MapUtilTest {
     }
 
 
-
     @Test
     public void flattenMap_withAllLevels() {
         Map<String, Object> nestedMap = ImmutableMap.of(

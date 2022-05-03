@@ -22,7 +22,7 @@ public class QuantityValidator extends BaseValidator<Order> {
                 errors.add("Invalid order quantity: " + quantity);
             }
             if (order.getQuantity() >= quantityValidatorThreshold) {
-                errors.add(format("Order quantity (%s) is equals or greater than the risk threshold (%s)", quantity, quantityValidatorThreshold) );
+                errors.add(format("Order quantity (%s) is equals or greater than the risk threshold (%s)", quantity, quantityValidatorThreshold));
             }
         }
         validateNext(order, errors);

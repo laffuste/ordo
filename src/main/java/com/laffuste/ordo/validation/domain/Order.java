@@ -2,10 +2,11 @@ package com.laffuste.ordo.validation.domain;
 
 import lombok.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 
     public static final String TYPE_MARKET = "MARKET";

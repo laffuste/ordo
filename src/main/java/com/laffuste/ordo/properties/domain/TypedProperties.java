@@ -40,7 +40,7 @@ public class TypedProperties extends Properties {
             return (Double) ret;
         }
         if (ret instanceof Integer) {
-            return ((Integer)ret).doubleValue();
+            return ((Integer) ret).doubleValue();
         }
         if (ret instanceof String) {
             try {

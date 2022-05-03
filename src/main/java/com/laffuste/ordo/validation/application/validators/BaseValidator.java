@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Implements chain of responsibility / filter chain pattern for validations.
- *
+ * <p>
  * Implementations must call validateNext() inside validate().
  * Validation errors are added to errors arg.
  */

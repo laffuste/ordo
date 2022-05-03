@@ -18,6 +18,7 @@ public class JavaPropertyParser implements PropertiesFileParser {
         }
         return appProps;
     }
+
     @Override
     public boolean shouldTryToLoad(String filename) {
         return true;
